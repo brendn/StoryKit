@@ -1,6 +1,6 @@
 package co.grandcircus.adventure.controller;
 
-import co.grandcircus.adventure.StoryRepository;
+import co.grandcircus.adventure.repo.StoryRepository;
 import co.grandcircus.adventure.model.Scene;
 import co.grandcircus.adventure.model.Story;
 import org.springframework.beans.factory.annotation.Autowired;
