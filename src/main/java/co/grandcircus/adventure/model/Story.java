@@ -1,4 +1,4 @@
-package co.grandcircus.adventure.base;
+package co.grandcircus.adventure.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
