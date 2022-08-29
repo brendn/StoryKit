@@ -12,8 +12,6 @@
         
         <c:forEach var="scene" items="${options}">
 						<p>${scene.description}</p>
-				
-				
 		</c:forEach>
         
     </body>

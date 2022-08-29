@@ -9,7 +9,7 @@ import java.util.List;
 public class Scene {
 
     @Id
-    public String storyId;
+    public String id;
 
     /**
      * Previous scene, if this is the starting scene make this null
@@ -35,6 +35,15 @@ public class Scene {
 
     public void addOption(String title, String description) {
         options.add(new Scene(this, title, description));
+    }
+
+    public Scene getOption(String id) {
+        for (Scene scene : options) {
+            if (scene.id.equals(id)) {
+                return scene;
+            }
+        }
+        return null;
     }
 
     public Scene getParent() {
