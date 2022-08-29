@@ -19,7 +19,7 @@ public class AdventureController {
         return "home";
     }
     
-    @RequestMapping("/createScene")
+    @RequestMapping("/create")
     public String create() {
     	return "createScene";
     }
