@@ -16,7 +16,13 @@ public class Story {
 
     /**
      * First scene of this story's ID
+     *
+     * TODO: CRUD operations will return an ID instead of an actual object
      */
-    private String startingSceneID;
+    private Scene startingScene;
 
+    public Story(String title, Scene startingScene) {
+        this.title = title;
+        this.startingScene = startingScene;
+    }
 }
