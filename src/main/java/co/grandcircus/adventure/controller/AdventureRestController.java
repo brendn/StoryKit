@@ -1,5 +1,6 @@
 package co.grandcircus.adventure.controller;
 
+import co.grandcircus.adventure.repo.SceneRepository;
 import co.grandcircus.adventure.repo.StoryRepository;
 import co.grandcircus.adventure.exception.StoryNotFoundException;
 import co.grandcircus.adventure.model.Scene;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Closely match the guidelines, eg use String instead of direct object references in story.startingScene etc
@@ -15,16 +17,19 @@ import java.util.List;
 public class AdventureRestController {
 
     @Autowired
-    private StoryRepository repo;
+    private StoryRepository stories;
+
+    @Autowired
+    private SceneRepository scenes;
 
     @GetMapping("/stories")
     public List<Story> getStories() {
-        return repo.findAll();
+        return stories.findAll();
     }
 
     @GetMapping("/reset")
     public void reset() {
-        repo.deleteAll();
+        stories.deleteAll();
         // Setup root scene
         Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
         // Option for root scene
@@ -37,18 +42,29 @@ public class AdventureRestController {
         test.addOption("Exit", "You have chosen to exit");
 
         // Add the test scene to a new story
-        repo.insert(new Story("Test Story", test));
+        stories.insert(new Story("Test Story", test));
+    }
+
+    @GetMapping("/scenes")
+    public List<Scene> getAllScenes() {
+        List<Scene> out = new ArrayList<>();
+
+        for (Story story : stories.findAll()) {
+            out.add(story.getStartingScene());
+            out.addAll(story.getStartingScene().getOptions());
+        }
+        return out;
     }
 
     @GetMapping("/stories/{id}")
     public Story readOne(@PathVariable("id") String id) {
-        return repo.findById(id).orElseThrow(() -> new StoryNotFoundException("Story not found!"));
+        return stories.findById(id).orElseThrow(() -> new StoryNotFoundException("Story not found!"));
     }
 
     @DeleteMapping("/stories/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") String id) {
-        repo.deleteById(id);
+        stories.deleteById(id);
     }
 
     @ResponseBody

@@ -57,4 +57,8 @@ public class Scene {
     public String getDescription() {
         return this.description;
     }
+
+    public List<Scene> getOptions() {
+        return options;
+    }
 }
