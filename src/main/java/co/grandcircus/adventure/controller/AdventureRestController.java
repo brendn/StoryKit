@@ -1,5 +1,6 @@
 package co.grandcircus.adventure.controller;
 
+import co.grandcircus.adventure.exception.SceneNotFoundException;
 import co.grandcircus.adventure.repo.SceneRepository;
 import co.grandcircus.adventure.repo.StoryRepository;
 import co.grandcircus.adventure.exception.StoryNotFoundException;
@@ -31,34 +32,35 @@ public class AdventureRestController {
     public void reset() {
         stories.deleteAll();
         // Setup root scene
-        Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
+        Scene test = new Scene("-1", "Test Scene", "This is a test scene. What do?");
         // Option for root scene
         Scene continueOption = new Scene(test, "Continue", "You have chosen to continue");
         // Add an empty option to this scene
-        continueOption.addOption("Exit", "Exit the game");
+        continueOption.addOption(new Scene(continueOption,"Exit", "Exit the game"));
         // Add continue option to the root scene
         test.addOption(continueOption);
         // Add exit option to root scene
         test.addOption("Exit", "You have chosen to exit");
 
+        scenes.save(test);
+
         // Add the test scene to a new story
-        stories.insert(new Story("Test Story", test));
+        stories.save(new Story("Test Story", test.id));
     }
 
     @GetMapping("/scenes")
     public List<Scene> getAllScenes() {
-        List<Scene> out = new ArrayList<>();
-
-        for (Story story : stories.findAll()) {
-            out.add(story.getStartingScene());
-            out.addAll(story.getStartingScene().getOptions());
-        }
-        return out;
+        return scenes.findAll();
     }
 
     @GetMapping("/stories/{id}")
     public Story readOne(@PathVariable("id") String id) {
         return stories.findById(id).orElseThrow(() -> new StoryNotFoundException("Story not found!"));
+    }
+
+    @GetMapping("/scenes/{id}")
+    public Scene readOneScene(@PathVariable("id") String id) {
+        return scenes.findById(id).orElseThrow(() -> new SceneNotFoundException("Story not found!"));
     }
 
     @DeleteMapping("/stories/{id}")

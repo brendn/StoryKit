@@ -19,14 +19,14 @@ public class Story {
      *
      * TODO: CRUD operations will return an ID instead of an actual object
      */
-    private Scene startingScene;
+    private String startingScene;
 
-    public Story(String title, Scene startingScene) {
+    public Story(String title, String startingScene) {
         this.title = title;
         this.startingScene = startingScene;
     }
 
-    public Scene getStartingScene() {
+    public String getStartingScene() {
         return startingScene;
     }
 

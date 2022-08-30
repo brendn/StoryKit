@@ -39,7 +39,7 @@ public class AdventureController {
     private void reset() {
         repo.deleteAll();
         // Setup root scene
-        Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
+        Scene test = new Scene("", "Test Scene", "This is a test scene. What do?");
         // Option for root scene
         Scene continueOption = new Scene(test, "Continue", "You have chosen to continue");
         // Add an empty option to this scene
@@ -50,7 +50,7 @@ public class AdventureController {
         test.addOption("Exit", "You have chosen to exit");
 
         // Add the test scene to a new story
-        repo.insert(new Story("Test Story", test));
+        repo.insert(new Story("Test Story", test.id));
     }
 
 }
