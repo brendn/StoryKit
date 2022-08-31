@@ -26,15 +26,11 @@ public class Story {
         this.startingScene = startingScene;
     }
 
-    public String getStartingScene() {
-        return startingScene;
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public String getID() {
-        return id;
     }
 }

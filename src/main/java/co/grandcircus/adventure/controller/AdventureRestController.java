@@ -32,7 +32,7 @@ public class AdventureRestController {
     public void reset() {
         stories.deleteAll();
         // Setup root scene
-        Scene test = new Scene("-1", "Test Scene", "This is a test scene. What do?");
+        Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
         // Option for root scene
         Scene continueOption = new Scene(test, "Continue", "You have chosen to continue");
         // Add an empty option to this scene

@@ -15,7 +15,7 @@ public class Scene {
     /**
      * Previous scene, if this is the starting scene make this null
      */
-    private String parentID;
+    private Scene parent;
 
     private List<Scene> options = new ArrayList<>();
 
@@ -24,14 +24,14 @@ public class Scene {
 
     private String description;
 
-    public Scene(String parentID, String title, String description) {
-        this.parentID = parentID;
-        this.title = title;
-        this.description = description;
+    public Scene() {
+        super();
     }
 
     public Scene(Scene parent, String title, String description) {
-        this(parent.id, title, description);
+        this.parent = parent;
+        this.title = title;
+        this.description = description;
     }
 
     public void addOption(Scene scene) {
@@ -39,7 +39,7 @@ public class Scene {
     }
 
     public void addOption(String title, String description) {
-        options.add(new Scene(this.id, title, description));
+        options.add(new Scene(this, title, description));
     }
 
     public Scene getOption(String id) {
@@ -51,8 +51,8 @@ public class Scene {
         return null;
     }
 
-    public String getParent() {
-        return parentID;
+    public Scene getParent() {
+        return this.parent;
     }
 
     public String getTitle() {
