@@ -8,7 +8,15 @@
         <title>Choose Your Own Adventure</title>
     </head>
     <body>
-        Hello world!
+         
+    	<p>title: ${title}</p>
+    	
+     	<p>Description: ${description}</p>
+      
+         <c:forEach var="option" items="${options}">
+						<p><a href="/home?id=${option.id}">${option.description}</a></p>
+		</c:forEach>  
+        
         
     </body>
 </html>
