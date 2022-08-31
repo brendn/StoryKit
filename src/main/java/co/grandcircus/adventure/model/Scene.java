@@ -27,8 +27,16 @@ public class Scene {
     public Scene() {
         super();
     }
+    
+    public String getId() {
+		return id;
+	}
 
-    public Scene(Scene parent, String title, String description) {
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Scene(Scene parent, String title, String description) {
         this.parent = parent;
         this.title = title;
         this.description = description;

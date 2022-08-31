@@ -1,10 +1,17 @@
 package co.grandcircus.adventure.controller;
 
+import co.grandcircus.adventure.repo.SceneRepository;
 import co.grandcircus.adventure.repo.StoryRepository;
+import co.grandcircus.adventure.exception.SceneNotFoundException;
 import co.grandcircus.adventure.model.Scene;
 import co.grandcircus.adventure.model.Story;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -52,5 +59,29 @@ public class AdventureController {
         // Add the test scene to a new story
         repo.insert(new Story("Test Story", test.id));
     }
+    
+	@Autowired 
+	private SceneRepository scene_repo;
+	
+	// story repo
+//	@Autowired story_repo;
+	
+	@RequestMapping("/home/{id}")
+	public String displayScene(@PathVariable("id") String id, Model model){
+		
+//The scene description.
+//		The story id and title.
+//		An array of the options, including the text and next sceneId for each
+		
+		Scene scene = scene_repo.findById(id).orElseThrow(() -> new SceneNotFoundException(id));		
+		String title = scene.getTitle();
+		String description = scene.getDescription();
+		List<Scene> options = scene.getOptions();
+
+		model.addAttribute("description", description);
+		model.addAttribute("title", title);
+		model.addAttribute("options", options);		
+		return "home";
+	}
 
 }
