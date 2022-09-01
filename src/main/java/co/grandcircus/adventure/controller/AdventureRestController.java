@@ -31,21 +31,27 @@ public class AdventureRestController {
     @GetMapping("/reset")
     public void reset() {
         stories.deleteAll();
+        scenes.deleteAll();
         // Setup root scene
         Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
+        test.id = "Fooo";
+        Story testStory = new Story("Test story", test.id);
+        testStory.setId("pleaseworkman");
+        stories.save(new Story("Test Story", test.id));
+        test.setStoryId(testStory.getId());
         // Option for root scene
-        Scene continueOption = new Scene(test, "Continue", "You have chosen to continue");
+        Scene continueOption = new Scene(test.id, "Continue", "You have chosen to continue", testStory.getId());
         // Add an empty option to this scene
-        continueOption.addOption(new Scene(continueOption,"Exit", "Exit the game"));
-        // Add continue option to the root scene
-        test.addOption(continueOption);
+        Scene exit = new Scene(continueOption.id,"Exit", "Exit the game", testStory.getId());
         // Add exit option to root scene
-        test.addOption("Exit", "You have chosen to exit");
+        Scene exitMain = new Scene(test.id, "Exit", "You have chosen to exit", testStory.getId());
 
         scenes.save(test);
+        scenes.save(continueOption);
+        scenes.save(exit);
+        scenes.save(exitMain);
 
         // Add the test scene to a new story
-        stories.save(new Story("Test Story", test.id));
     }
 
     @GetMapping("/scenes")
@@ -56,6 +62,11 @@ public class AdventureRestController {
     @GetMapping("/stories/{id}")
     public Story readOne(@PathVariable("id") String id) {
         return stories.findById(id).orElseThrow(() -> new StoryNotFoundException("Story not found!"));
+    }
+
+    @GetMapping("/scenes/{id}/options")
+    public List<Scene> getOptionsBySceneID(@PathVariable("id") String id) {
+        return scenes.findByParentID(id).orElseThrow(() -> new SceneNotFoundException("Scene not found!"));
     }
 
     @GetMapping("/scenes/{id}")
@@ -75,4 +86,5 @@ public class AdventureRestController {
     public String notFound(StoryNotFoundException ex) {
         return ex.getMessage();
     }
+
 }

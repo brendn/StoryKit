@@ -3,6 +3,8 @@ package co.grandcircus.adventure.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 @Document("story")
 public class Story {
 
@@ -32,5 +34,13 @@ public class Story {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getStartingScene() {
+        return startingScene;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -7,6 +7,7 @@ import co.grandcircus.adventure.model.Scene;
 import co.grandcircus.adventure.model.Story;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,20 +45,14 @@ public class AdventureController {
      *      + You have chosen to exit           // Description for Option #2
      */
     private void reset() {
-        repo.deleteAll();
-        // Setup root scene
-        Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
-        // Option for root scene
-        Scene continueOption = new Scene(test, "Continue", "You have chosen to continue");
-        // Add an empty option to this scene
-        continueOption.addOption("Exit", "Exit the game");
-        // Add continue option to the root scene
-        test.addOption(continueOption);
-        // Add exit option to root scene
-        test.addOption("Exit", "You have chosen to exit");
-
-        // Add the test scene to a new story
-        repo.insert(new Story("Test Story", test.id));
+//        repo.deleteAll();
+//        // Setup root scene
+//        Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
+//        // Option for root scene
+//        Scene continueOption = new Scene(test.id, "Continue", "You have chosen to continue");
+//
+//        // Add the test scene to a new story
+//        repo.insert(new Story("Test Story", test.id));
     }
     
 	@Autowired 
@@ -76,11 +71,11 @@ public class AdventureController {
 		Scene scene = scene_repo.findById(id).orElseThrow(() -> new SceneNotFoundException(id));		
 		String title = scene.getTitle();
 		String description = scene.getDescription();
-		List<Scene> options = scene.getOptions();
+        List<Scene> options = scene_repo.findByParentID(id).orElseThrow(() -> new SceneNotFoundException("Scene not found!"));
 
 		model.addAttribute("description", description);
 		model.addAttribute("title", title);
-		model.addAttribute("options", options);		
+		model.addAttribute("options", options);
 		return "home";
 	}
 
