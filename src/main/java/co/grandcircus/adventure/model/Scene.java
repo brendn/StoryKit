@@ -3,9 +3,6 @@ package co.grandcircus.adventure.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Document("scene")
 public class Scene {
 
@@ -15,14 +12,14 @@ public class Scene {
     /**
      * Previous scene, if this is the starting scene make this null
      */
-    private Scene parent;
-
-    private List<Scene> options = new ArrayList<>();
+    private String parentID;
 
     // "option"
     private String title;
 
     private String description;
+
+    private String storyId;
 
     public Scene() {
         super();
@@ -36,31 +33,21 @@ public class Scene {
 		this.id = id;
 	}
 
-	public Scene(Scene parent, String title, String description) {
-        this.parent = parent;
+	public Scene(String parentID, String title, String description, String storyId) {
+        this.parentID = parentID;
+        this.title = title;
+        this.description = description;
+        this.storyId = storyId;
+    }
+
+	public Scene(String parentID, String title, String description) {
+        this.parentID = parentID;
         this.title = title;
         this.description = description;
     }
 
-    public void addOption(Scene scene) {
-        this.options.add(scene);
-    }
-
-    public void addOption(String title, String description) {
-        options.add(new Scene(this, title, description));
-    }
-
-    public Scene getOption(String id) {
-        for (Scene scene : options) {
-            if (scene.id.equals(id)) {
-                return scene;
-            }
-        }
-        return null;
-    }
-
-    public Scene getParent() {
-        return this.parent;
+    public String getParentID() {
+        return this.parentID;
     }
 
     public String getTitle() {
@@ -71,7 +58,11 @@ public class Scene {
         return this.description;
     }
 
-    public List<Scene> getOptions() {
-        return options;
+    public String getStoryId() {
+        return storyId;
+    }
+
+    public void setStoryId(String storyId) {
+        this.storyId = storyId;
     }
 }
