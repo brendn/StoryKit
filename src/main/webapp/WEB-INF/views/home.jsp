@@ -14,10 +14,10 @@
      	<p>Description: ${description}</p>
       
          <c:forEach var="option" items="${options}">
-						<p><a href="/home?id=${option.id}">${option.description}</a></p>
+						<p><a href="/home/${option.id}">${option.description}</a></p>
 		</c:forEach> 
 
-		<a href="/create">Create your own scene</a>
+		<a href="/create/${id}">Create your own scene</a>
         
         
     </body>

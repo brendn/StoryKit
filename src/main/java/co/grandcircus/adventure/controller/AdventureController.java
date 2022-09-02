@@ -13,13 +13,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdventureController {
 
     @Autowired
     private StoryRepository repo;
+    
+	@Autowired 
+	private SceneRepository scene_repo;
 
     @RequestMapping("/")
     public String home() {
@@ -27,8 +33,19 @@ public class AdventureController {
         return "home";
     }
     
-    @RequestMapping("/create")
-    public String create() {
+    @RequestMapping("/create/{id}")
+    public String createScene(@PathVariable("id") String id) {
+    	return "createScene";
+    }
+    
+    @PostMapping("/create/{id}")
+    public String create(@PathVariable("id") String id, @RequestParam String title, @RequestParam String description, Model model) {
+    	String parent = scene_repo.findById(id).orElseThrow(() -> new SceneNotFoundException(id)).getId();
+    	Scene scene = new Scene(parent, title,description);
+    	scene_repo.save(scene);
+    	
+ 
+    	
     	return "createScene";
     }
 
@@ -55,8 +72,7 @@ public class AdventureController {
 //        repo.insert(new Story("Test Story", test.id));
     }
     
-	@Autowired 
-	private SceneRepository scene_repo;
+
 	
 	// story repo
 //	@Autowired story_repo;
@@ -72,7 +88,8 @@ public class AdventureController {
 		String title = scene.getTitle();
 		String description = scene.getDescription();
         List<Scene> options = scene_repo.findByParentID(id).orElseThrow(() -> new SceneNotFoundException("Scene not found!"));
-
+        
+		model.addAttribute("id", id);
 		model.addAttribute("description", description);
 		model.addAttribute("title", title);
 		model.addAttribute("options", options);

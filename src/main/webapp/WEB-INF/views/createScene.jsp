@@ -14,14 +14,13 @@
 	<h2>Create a new scene</h2>
 	
 	<label for="option">Scene Option:</label><br>
-	<form action="/createScene">
-		<input type="text" id="option" name="option" value=""><br>
-	</form>
+	<form action="/create/${id}" method="post">
+		<input type="text" id="option" name="title" value=""><br>
 
 	<label for="option">Scene Description:</label>
 	<br>
-	<form action="/createScene">
-		<textarea rows="4" cols="50"></textarea>
+	
+		<textarea name = "description" rows="4" cols="50"></textarea>
 		<input type="submit" value="Submit">
 	</form>
 
