@@ -9,7 +9,7 @@
 <title>Create A New Scene</title>
 </head>
 <body>
-	<a href="/home">Home</a>
+	<a href="/index">Home</a>
 	
 	<h2>Create a new scene</h2>
 	

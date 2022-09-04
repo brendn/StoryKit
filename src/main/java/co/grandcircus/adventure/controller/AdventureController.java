@@ -1,6 +1,7 @@
 package co.grandcircus.adventure.controller;
 
 import co.grandcircus.adventure.repo.SceneRepository;
+
 import co.grandcircus.adventure.repo.StoryRepository;
 import co.grandcircus.adventure.exception.SceneNotFoundException;
 import co.grandcircus.adventure.model.Scene;
@@ -12,11 +13,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 @Controller
 public class AdventureController {
@@ -27,10 +25,17 @@ public class AdventureController {
 	@Autowired 
 	private SceneRepository scene_repo;
 
-    @RequestMapping("/")
-    public String home() {
-        reset();
-        return "home";
+	  @RequestMapping("/")
+	    public String showIndex() {
+		  	scene_repo.findAll();
+	    	return "index";
+	    }
+	
+    @RequestMapping("/home")
+    public String index(Model model) {
+        List<Story> options = repo.findAll();
+        model.addAttribute("options", options);
+    	return "home";
     }
     
     @RequestMapping("/create/{id}")
@@ -43,10 +48,7 @@ public class AdventureController {
     	String parent = scene_repo.findById(id).orElseThrow(() -> new SceneNotFoundException(id)).getId();
     	Scene scene = new Scene(parent, title,description);
     	scene_repo.save(scene);
-    	
- 
-    	
-    	return "createScene";
+      	return "createScene";
     }
 
     /**
@@ -61,26 +63,14 @@ public class AdventureController {
      *      - Exit                              // Option #2 - Just the title
      *      + You have chosen to exit           // Description for Option #2
      */
-    private void reset() {
-//        repo.deleteAll();
-//        // Setup root scene
-//        Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
-//        // Option for root scene
-//        Scene continueOption = new Scene(test.id, "Continue", "You have chosen to continue");
-//
-//        // Add the test scene to a new story
-//        repo.insert(new Story("Test Story", test.id));
-    }
-    
-
 	
-	// story repo
+// story repo
 //	@Autowired story_repo;
 	
 	@RequestMapping("/home/{id}")
 	public String displayScene(@PathVariable("id") String id, Model model){
 		
-//The scene description.
+//		The scene description.
 //		The story id and title.
 //		An array of the options, including the text and next sceneId for each
 		
@@ -94,6 +84,13 @@ public class AdventureController {
 		model.addAttribute("title", title);
 		model.addAttribute("options", options);
 		return "home";
+	}
+// Start A Story On Home Page	
+    @PostMapping("/createStory")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Story createStory(@RequestBody Story story) {
+		repo.insert(story);
+		return story;
 	}
 
 }
