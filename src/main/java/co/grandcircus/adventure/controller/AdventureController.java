@@ -67,7 +67,7 @@ public class AdventureController {
 // story repo
 //	@Autowired story_repo;
 	
-	@RequestMapping("/home/{id}")
+	@RequestMapping("/scene/{id}")
 	public String displayScene(@PathVariable("id") String id, Model model){
 		
 //		The scene description.
@@ -83,7 +83,7 @@ public class AdventureController {
 		model.addAttribute("description", description);
 		model.addAttribute("title", title);
 		model.addAttribute("options", options);
-		return "home";
+		return "index";
 	}
 // Start A Story On Home Page	
     @PostMapping("/createStory")

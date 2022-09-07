@@ -13,7 +13,7 @@
 
 	<c:forEach var="option" items="${options}">
 		<p>
-			<a href="/home/${option.id}">${option.title}</a>
+			<a href="/scene/${option.getStartingScene()}">${option.title}</a>
 		</p>
 	</c:forEach>
 	
