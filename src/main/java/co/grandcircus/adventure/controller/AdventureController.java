@@ -73,15 +73,23 @@ public class AdventureController {
 
     @RequestMapping("/createStory")
     public String createPage() {
+    		
+
         return "createStory";
     }
 
     // Start A Story On Home Page
     @PostMapping("/createStory")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Story createStory(@RequestBody Story story) {
-        stories.insert(story);
-        return story;
+//    @ResponseStatus(HttpStatus.CREATED)
+    public String createStory(@RequestParam("title") String title, @RequestParam("picture") String picture, @RequestParam("option") String option, @RequestParam("description") String description) {
+
+    	Story newStory = new Story(title, option,picture);
+    	Scene newScene = new Scene(null,option,description);
+    	
+    	stories.insert(newStory);
+    	scenes.insert(newScene);
+    	
+        return "redirect:/";
     }
 
 }

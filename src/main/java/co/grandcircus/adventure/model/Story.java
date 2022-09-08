@@ -22,10 +22,20 @@ public class Story {
     private String startingScene;
 
     private String picture;
-
+    
     public Story(String title, String startingScene) {
         this.title = title;
         this.startingScene = startingScene;
+        
+    	}
+    public Story(String title, String startingScene, String picture) {
+        this.title = title;
+        this.startingScene = startingScene;
+        this.picture = picture;
+        }
+    
+    public Story() {
+    	
     }
 
     public String getId() {
@@ -54,4 +64,8 @@ public class Story {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+
+    
+    
 }
