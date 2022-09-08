@@ -14,7 +14,7 @@
      	<p>Description: ${description}</p>
       
          <c:forEach var="option" items="${options}">
-						<p><a href="/home?id=${option.id}">${option.description}</a></p>
+						<p><a href="/scene/${option.id}">${option.description}</a></p>
 		</c:forEach>  
 		
 		<a href="/create/${id}">Create your own scene</a>
