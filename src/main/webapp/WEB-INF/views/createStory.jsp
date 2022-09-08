@@ -9,7 +9,7 @@
 <title>Start A Story</title>
 </head>
 	<body>
-		<a href="/index">Home</a>
+		<a href="/">Home</a>
 		
 		<h2>Start A New Story</h2>
 		

@@ -9,12 +9,12 @@
     </head>
     <body>
          
-    	<p>title: ${title}</p>
+    	<p>${title}</p>
     	
-     	<p>Description: ${description}</p>
+     	<p>${description}</p>
       
          <c:forEach var="option" items="${options}">
-						<p><a href="/scene/${option.id}">${option.description}</a></p>
+            <p><a href="/scene/${option.id}">${option.title}</a></p>
 		</c:forEach>  
 		
 		<a href="/create/${id}">Create your own scene</a>

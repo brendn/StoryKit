@@ -9,8 +9,10 @@
 <title>Create A New Scene</title>
 </head>
 <body>
-	<a href="/index">Home</a>
-	
+	<a href="/">Home</a>
+	<br />
+	<a href="/scene/${id}">Go back</a>
+
 	<h2>Create a new scene</h2>
 	
 	<label for="option">Scene Option:</label><br>
