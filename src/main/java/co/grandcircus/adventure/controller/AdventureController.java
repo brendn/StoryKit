@@ -3,6 +3,9 @@ package co.grandcircus.adventure.controller;
 import co.grandcircus.adventure.repo.SceneRepository;
 
 import co.grandcircus.adventure.repo.StoryRepository;
+import co.grandcircus.adventure.api.Photo;
+import co.grandcircus.adventure.api.PictureResponse;
+import co.grandcircus.adventure.api.PictureService;
 import co.grandcircus.adventure.exception.SceneNotFoundException;
 import co.grandcircus.adventure.model.Scene;
 import co.grandcircus.adventure.model.Story;
@@ -11,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +28,9 @@ public class AdventureController {
     
 	@Autowired 
 	private SceneRepository scene_repo;
+	
+	@Autowired
+	private PictureService apiService;
 
 	  @RequestMapping("/")
 	    public String showIndex() {
@@ -35,6 +42,17 @@ public class AdventureController {
     public String index(Model model) {
         List<Story> options = repo.findAll();
         model.addAttribute("options", options);
+        
+		PictureResponse newPic = apiService.getPicture("Ocean");
+		
+		for (Photo photo: newPic.getPhotos()) {
+			System.out.println(photo.getAvgColor());
+			System.out.println(photo.getSrc().getOriginal());
+		}
+		
+		
+		System.out.println(newPic.getTotalResults());
+
     	return "home";
     }
     
@@ -92,5 +110,9 @@ public class AdventureController {
 		repo.insert(story);
 		return story;
 	}
+    
+
+    
+
 
 }
