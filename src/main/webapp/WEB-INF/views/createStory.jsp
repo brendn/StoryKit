@@ -12,11 +12,11 @@
 		<a href="/">Home</a>
 		
 		<h2>Start A New Story</h2>
-		
-		<label for="option">Scene Option:</label><br>
+
 		<form action="/create/${id}" method="post">
-			<input type="text" id="option" name="title" value=""><br>
-	
+		<label for="title">Story Title:</label><br> <input type="text" id="title" name="title" value=""><br>
+		<label for="picture">Story Picture: </label> <input type="text" id="picture" name="picture" value=""><br>
+		<label for="option">Scene Option:</label><br> <input type="text" id="option" name="title" value=""><br>
 		<label for="option">Scene Description:</label>
 		<br>
 		

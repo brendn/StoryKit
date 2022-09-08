@@ -11,13 +11,14 @@
 
 	<p>Choose A Story From The List Below</p>
 
- 	<c:forEach var="option" items="${options}">
+ 	<c:forEach var="option" items="${options}" varStatus="loop">
 		<p>
+		    <img src="${urls[loop.index]}"/> <br/>
 			<a href="/scene/${option.getStartingScene()}">${option.title}</a>
 		</p>
 	</c:forEach>
 	
-	<p>Feeling Creative? <a href="/create/${id}">Start Your Own Story</a></p>
+	<p>Feeling Creative? <a href="/createStory">Start Your Own Story</a></p>
 
 </body>
 </html>

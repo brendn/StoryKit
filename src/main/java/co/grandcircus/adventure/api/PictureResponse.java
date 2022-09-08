@@ -27,6 +27,10 @@ public class PictureResponse {
 		this.photos = photos;
 	}
 
+	public String getSmallURL() {
+		return getPhotos().get(0).getSrc().getSmall();
+	}
+
 }
 
 //class Photo{

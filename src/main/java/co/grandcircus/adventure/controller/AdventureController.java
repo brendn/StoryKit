@@ -9,6 +9,7 @@ import co.grandcircus.adventure.exception.SceneNotFoundException;
 import co.grandcircus.adventure.model.Scene;
 import co.grandcircus.adventure.model.Story;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,14 @@ public class AdventureController {
     @RequestMapping("/")
     public String index(Model model) {
         List<Story> options = stories.findAll();
-        model.addAttribute("options", options);
+        List<String> urls = new ArrayList<>();
+        for (Story story : options) {
+            urls.add(service.getPicture(story.getPicture()).getSmallURL());
+        }
 
         PictureResponse newPic = service.getPicture("Ocean");
+        model.addAttribute("options", options);
+        model.addAttribute("urls", urls);
         return "home";
     }
 
@@ -63,6 +69,11 @@ public class AdventureController {
         model.addAttribute("title", title);
         model.addAttribute("options", options);
         return "scene";
+    }
+
+    @RequestMapping("/createStory")
+    public String createPage() {
+        return "createStory";
     }
 
     // Start A Story On Home Page
