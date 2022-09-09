@@ -78,10 +78,10 @@ public class AdventureController {
     // Start A Story On Home Page
     @PostMapping("/createStory")
     public String createStory(@RequestParam("title") String title, @RequestParam("picture") String picture, @RequestParam("option") String option, @RequestParam("description") String description) {
-    	Story newStory = new Story(title, option, picture);
-    	Scene newScene = new Scene(null, option, description);
-    	stories.insert(newStory);
-    	scenes.insert(newScene);
+        Scene newScene = new Scene(null, option, description);
+        scenes.insert(newScene);
+        Story newStory = new Story(title, newScene.id, picture);
+        stories.insert(newStory);
         return "redirect:/";
     }
 

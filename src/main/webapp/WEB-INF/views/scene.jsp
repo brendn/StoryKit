@@ -9,9 +9,9 @@
     </head>
     <body>
          
-    	<p>${title}</p>
+    	<h3><p>${title}</p></h3>
     	
-     	<p>${description}</p>
+     	<h4><p><i>${description}</i></p></h4>
       
          <c:forEach var="option" items="${options}">
             <p><a href="/scene/${option.id}">${option.title}</a></p>

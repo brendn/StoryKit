@@ -59,8 +59,9 @@ public class AdventureRestController {
 
     @DeleteMapping("/stories/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") String id) {
+    public String delete(@PathVariable("id") String id) {
         stories.deleteById(id);
+        return "Deleted Story ID: " + id;
     }
 
     @ResponseBody
