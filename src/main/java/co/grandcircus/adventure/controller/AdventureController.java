@@ -11,6 +11,7 @@ import co.grandcircus.adventure.model.Story;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,10 +51,11 @@ public class AdventureController {
 
     @PostMapping("/create/{id}")
     public String create(@PathVariable("id") String id, @RequestParam String title, @RequestParam String description, Model model) {
-        String parent = scenes.findById(id).orElseThrow(() -> new SceneNotFoundException(id)).getId();
-        Scene scene = new Scene(parent, title, description);
+        Scene parent = scenes.findById(id).orElseThrow(() -> new SceneNotFoundException(id));
+        Scene scene = new Scene(parent.id, title, description);
+        scene.setStoryId(parent.getStoryId());
         scenes.save(scene);
-        return "createScene";
+        return "redirect:/scene/{id}";
     }
 
     @RequestMapping("/scene/{id}")
@@ -79,9 +81,11 @@ public class AdventureController {
     @PostMapping("/createStory")
     public String createStory(@RequestParam("title") String title, @RequestParam("picture") String picture, @RequestParam("option") String option, @RequestParam("description") String description) {
         Scene newScene = new Scene(null, option, description);
-        scenes.insert(newScene);
+        scenes.save(newScene);
         Story newStory = new Story(title, newScene.id, picture);
-        stories.insert(newStory);
+        stories.save(newStory);
+        newScene.setStoryId(newStory.getId());
+        scenes.save(newScene);
         return "redirect:/";
     }
 

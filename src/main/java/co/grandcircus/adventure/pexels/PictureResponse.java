@@ -20,7 +20,11 @@ public class PictureResponse {
 	}
 
 	public String getSmallURL() {
-		return getPhotos().get(0).getSrc().getSmall();
+		try {
+			return getPhotos().get(0).getSrc().getSmall();
+		} catch (Exception e) {
+			return "";
+		}
 	}
 
 }

@@ -1,6 +1,8 @@
 package co.grandcircus.adventure.controller;
 
 import co.grandcircus.adventure.exception.SceneNotFoundException;
+import co.grandcircus.adventure.model.response.ExtendedSceneResponse;
+import co.grandcircus.adventure.model.response.OptionResponse;
 import co.grandcircus.adventure.model.response.SceneResponse;
 import co.grandcircus.adventure.model.response.StoryResponse;
 import co.grandcircus.adventure.repo.SceneRepository;
@@ -51,6 +53,17 @@ public class AdventureRestController {
         return SceneResponse.fromScenes(scenesList);
     }
 
+    @GetMapping("/scenes/{id}/extended")
+    public ExtendedSceneResponse getExtendedSceneInfo(@PathVariable("id") String id) {
+        Scene scene = scenes.findById(id).orElseThrow(() -> new SceneNotFoundException("idk"));
+        List<Scene> optionsOld = scenes.findByParentID(id).orElseThrow(() -> new SceneNotFoundException("Not here chief"));
+        List<OptionResponse> options = OptionResponse.fromScenes(optionsOld);
+        OptionResponse[] optionArray = options.toArray(new OptionResponse[options.size()]);
+        String storyTitle = readOne(scene.getStoryId()).title;
+
+        return new ExtendedSceneResponse(scene.getDescription(), scene.getStoryId(), storyTitle, optionArray);
+    }
+
     @GetMapping("/scenes/{id}")
     public SceneResponse readOneScene(@PathVariable("id") String id) {
         Scene scene = scenes.findById(id).orElseThrow(() -> new SceneNotFoundException("Story not found!"));
@@ -61,6 +74,13 @@ public class AdventureRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public String delete(@PathVariable("id") String id) {
         stories.deleteById(id);
+        for (Scene scene : scenes.findAll()) {
+            if (scene.getStoryId() != null) {
+                if (scene.getStoryId().equals(id)) {
+                    scenes.deleteById(scene.getId());
+                }
+            }
+        }
         return "Deleted Story ID: " + id;
     }
 
@@ -70,6 +90,5 @@ public class AdventureRestController {
     public String notFound(StoryNotFoundException ex) {
         return ex.getMessage();
     }
-
 
 }

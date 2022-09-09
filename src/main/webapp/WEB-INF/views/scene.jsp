@@ -18,6 +18,8 @@
 		</c:forEach>
 		
 		<a href="/create/${id}">Create your own scene</a>
+		<br/>
+		<a href="/">Home</a>
         
         
     </body>

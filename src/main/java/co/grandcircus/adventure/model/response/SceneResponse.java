@@ -7,9 +7,10 @@ import java.util.List;
 
 public class SceneResponse {
 
-    public String storyId, parentId, option, description;
+    public String id, storyId, parentId, option, description;
 
-    public SceneResponse(String storyId, String parentId, String option, String description) {
+    public SceneResponse(String id, String storyId, String parentId, String option, String description) {
+        this.id = id;
         this.storyId = storyId;
         this.parentId = parentId;
         this.option = option;
@@ -17,6 +18,7 @@ public class SceneResponse {
     }
 
     public SceneResponse(Scene scene) {
+        this.id = scene.getId();
         this.storyId = scene.getStoryId();
         this.parentId = scene.getParentID();
         this.option = scene.getTitle();
