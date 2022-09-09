@@ -3,8 +3,8 @@ package co.grandcircus.adventure.controller;
 import co.grandcircus.adventure.repo.SceneRepository;
 
 import co.grandcircus.adventure.repo.StoryRepository;
-import co.grandcircus.adventure.api.PictureResponse;
-import co.grandcircus.adventure.api.PictureService;
+import co.grandcircus.adventure.pexels.PictureResponse;
+import co.grandcircus.adventure.pexels.PictureService;
 import co.grandcircus.adventure.exception.SceneNotFoundException;
 import co.grandcircus.adventure.model.Scene;
 import co.grandcircus.adventure.model.Story;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
 
 @Controller
 public class AdventureController {
@@ -73,22 +72,16 @@ public class AdventureController {
 
     @RequestMapping("/createStory")
     public String createPage() {
-    		
-
         return "createStory";
     }
 
     // Start A Story On Home Page
     @PostMapping("/createStory")
-//    @ResponseStatus(HttpStatus.CREATED)
     public String createStory(@RequestParam("title") String title, @RequestParam("picture") String picture, @RequestParam("option") String option, @RequestParam("description") String description) {
-
-    	Story newStory = new Story(title, option,picture);
-    	Scene newScene = new Scene(null,option,description);
-    	
+    	Story newStory = new Story(title, option, picture);
+    	Scene newScene = new Scene(null, option, description);
     	stories.insert(newStory);
     	scenes.insert(newScene);
-    	
         return "redirect:/";
     }
 

@@ -1,4 +1,4 @@
-package co.grandcircus.adventure.api;
+package co.grandcircus.adventure.pexels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,16 +14,8 @@ public class Photo {
 		return avgColor;
 	}
 
-	public void setAvgColor(String avgColor) {
-		this.avgColor = avgColor;
-	}
-
 	public Source getSrc() {
 		return src;
-	}
-
-	public void setSrc(Source src) {
-		this.src = src;
 	}
 
 }

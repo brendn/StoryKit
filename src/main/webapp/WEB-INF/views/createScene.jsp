@@ -26,17 +26,5 @@
 		<input type="submit" value="Submit">
 	</form>
 
-	<!-- <form class="form" method = "POST" action ="/createScene">
-		<div class="wrap">
-			<div class="search">
-				<input type="text" placeholder="Start typing..." class="searchTerm" name="searchParam" placeholder="Search here!">
-				<button type="submit" class="searchButton">
-					<i class="fa fa-search"></i>
-				</button>
-			</div>
-		</div>
-	</form>	
-	 -->
-
 </body>
 </html>

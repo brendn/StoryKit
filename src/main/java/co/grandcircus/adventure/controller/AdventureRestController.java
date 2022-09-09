@@ -1,6 +1,8 @@
 package co.grandcircus.adventure.controller;
 
 import co.grandcircus.adventure.exception.SceneNotFoundException;
+import co.grandcircus.adventure.model.response.SceneResponse;
+import co.grandcircus.adventure.model.response.StoryResponse;
 import co.grandcircus.adventure.repo.SceneRepository;
 import co.grandcircus.adventure.repo.StoryRepository;
 import co.grandcircus.adventure.exception.StoryNotFoundException;
@@ -10,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Closely match the guidelines, eg use String instead of direct object references in story.startingScene etc
 @RestController
 public class AdventureRestController {
 
@@ -24,54 +24,37 @@ public class AdventureRestController {
     private SceneRepository scenes;
 
     @GetMapping("/stories")
-    public List<Story> getStories() {
-        return stories.findAll();
+    public List<StoryResponse> getStories() {
+        return StoryResponse.fromStories(stories.findAll());
     }
 
     @GetMapping("/reset")
     public void reset() {
         stories.deleteAll();
         scenes.deleteAll();
-        // Setup root scene
-        Scene test = new Scene(null, "Test Scene", "This is a test scene. What do?");
-        test.id = "Fooo";
-        Story testStory = new Story("Test story", test.id);
-        testStory.setId("pleaseworkman");
-        stories.save(new Story("Test Story", test.id));
-        test.setStoryId(testStory.getId());
-        // Option for root scene
-        Scene continueOption = new Scene(test.id, "Continue", "You have chosen to continue", testStory.getId());
-        // Add an empty option to this scene
-        Scene exit = new Scene(continueOption.id,"Exit", "Exit the game", testStory.getId());
-        // Add exit option to root scene
-        Scene exitMain = new Scene(test.id, "Exit", "You have chosen to exit", testStory.getId());
-
-        scenes.save(test);
-        scenes.save(continueOption);
-        scenes.save(exit);
-        scenes.save(exitMain);
-
-        // Add the test scene to a new story
     }
 
     @GetMapping("/scenes")
-    public List<Scene> getAllScenes() {
-        return scenes.findAll();
+    public List<SceneResponse> getAllScenes() {
+        return SceneResponse.fromScenes(scenes.findAll());
     }
 
     @GetMapping("/stories/{id}")
-    public Story readOne(@PathVariable("id") String id) {
-        return stories.findById(id).orElseThrow(() -> new StoryNotFoundException("Story not found!"));
+    public StoryResponse readOne(@PathVariable("id") String id) {
+        Story story = stories.findById(id).orElseThrow(() -> new StoryNotFoundException("Story not found!"));
+        return new StoryResponse(story);
     }
 
     @GetMapping("/scenes/{id}/options")
-    public List<Scene> getOptionsBySceneID(@PathVariable("id") String id) {
-        return scenes.findByParentID(id).orElseThrow(() -> new SceneNotFoundException("Scene not found!"));
+    public List<SceneResponse> getOptionsBySceneID(@PathVariable("id") String id) {
+        List<Scene> scenesList = scenes.findByParentID(id).orElseThrow(() -> new SceneNotFoundException("Scene not found!"));
+        return SceneResponse.fromScenes(scenesList);
     }
 
     @GetMapping("/scenes/{id}")
-    public Scene readOneScene(@PathVariable("id") String id) {
-        return scenes.findById(id).orElseThrow(() -> new SceneNotFoundException("Story not found!"));
+    public SceneResponse readOneScene(@PathVariable("id") String id) {
+        Scene scene = scenes.findById(id).orElseThrow(() -> new SceneNotFoundException("Story not found!"));
+        return new SceneResponse(scene);
     }
 
     @DeleteMapping("/stories/{id}")

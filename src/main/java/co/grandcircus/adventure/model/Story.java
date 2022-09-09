@@ -16,8 +16,6 @@ public class Story {
 
     /**
      * First scene of this story's ID
-     *
-     * TODO: CRUD operations will return an ID instead of an actual object
      */
     private String startingScene;
 
@@ -65,7 +63,4 @@ public class Story {
         this.picture = picture;
     }
 
-
-    
-    
 }
