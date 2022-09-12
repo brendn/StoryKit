@@ -42,9 +42,8 @@ public class PathCalculator {
         Scene out = null; // Output scene
         // Check each option for the given scene
         for (Scene option : getOptions(scene.id)) {
-            List<Scene> children = new ArrayList<>();
             // Find how many scenes follow the given option
-            int stepsToEnd = flattenChildren(option, children).size();
+            int stepsToEnd = flattenChildren(option, new ArrayList<>()).size();
             // If the steps are greater than the current longest path, update the output
             if (stepsToEnd > steps) {
                 steps = stepsToEnd;
@@ -60,9 +59,8 @@ public class PathCalculator {
         Scene out = null; // Output scene
         // Check each option for the given scene
         for (Scene option : getOptions(scene.id)) {
-            List<Scene> children = new ArrayList<>();
             // Find how many scenes follow the given option
-            int stepsToEnd = flattenChildren(option, children).size();
+            int stepsToEnd = flattenChildren(option, new ArrayList<>()).size();
             // If the steps are less than the current shortest path, update the output
             if (stepsToEnd < steps) {
                 steps = stepsToEnd;
