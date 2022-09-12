@@ -11,19 +11,16 @@ public class PictureResponse {
 	
 	private List<Photo> photos;
 
-	public Integer getTotalResults() {
-		return totalResults;
-	}
-
 	public List<Photo> getPhotos() {
-		return photos;
+		return this.photos;
 	}
 
 	public String getSmallURL() {
-		try {
-			return getPhotos().get(0).getSrc().getSmall();
-		} catch (Exception e) {
+		List<Photo> photoList = getPhotos();
+		if (photoList.isEmpty()) {
 			return "";
+		} else {
+			return photoList.get(0).getSrc().getSmall();
 		}
 	}
 

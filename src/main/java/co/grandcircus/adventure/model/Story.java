@@ -27,11 +27,9 @@ public class Story {
         this.picture = picture;
     }
 
-    public Story() {
+    public Story() {}
 
-    }
-
-    public String getId() {
+    public String getID() {
         return id;
     }
 
@@ -43,8 +41,16 @@ public class Story {
         return startingScene;
     }
 
-    public void setId(String id) {
+    public void setID(String id) {
         this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public String getPicture() {
@@ -52,10 +58,6 @@ public class Story {
             this.picture = "Forest";
         }
         return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
 }

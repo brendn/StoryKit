@@ -16,12 +16,12 @@
 		<div class="card">
           <center><img src="${urls[loop.index]}"></center>
           <div class="container">
-            <h4><a href="/scene/${option.getStartingScene()}">${option.title}</a></h4>
+           <center><a href="/scene/${option.getStartingScene()}">${option.title}</a></center>
           </div>
         </div>
 	</c:forEach>
 	
-	<p>Feeling Creative? <a href="/createStory">Start Your Own Story</a></p>
+	<p>Feeling Creative? <a href="/createStory" class="button1">Start Your Own Story</a></p>
 
 </body>
 </html>

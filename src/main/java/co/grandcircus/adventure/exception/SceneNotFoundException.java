@@ -7,4 +7,8 @@ public class SceneNotFoundException extends RuntimeException {
     public SceneNotFoundException(String s) {
         super(s);
     }
+
+    public SceneNotFoundException() {
+        super("Scene not found!");
+    }
 }

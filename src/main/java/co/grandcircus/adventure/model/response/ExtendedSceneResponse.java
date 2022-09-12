@@ -2,7 +2,11 @@ package co.grandcircus.adventure.model.response;
 
 public class ExtendedSceneResponse {
 
-    public String description, storyID, storyTitle;
+    public String description;
+
+    public String storyID;
+
+    public String storyTitle;
 
     public OptionResponse[] options;
 

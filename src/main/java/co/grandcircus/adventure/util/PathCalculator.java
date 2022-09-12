@@ -24,7 +24,7 @@ public class PathCalculator {
      *
      * @return A list containing all the scenes under the given parent scene.
      */
-    private List<Scene> flattenChildren(Scene parent, List<Scene> output) {
+    public List<Scene> flattenChildren(Scene parent, List<Scene> output) {
         // Add the given scene to the output list
         output.add(parent);
         // Obtain all the options for the given scene

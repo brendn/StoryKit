@@ -10,7 +10,7 @@ public class SceneResponse {
     public String id, storyId, parentId, option, description;
 
     public SceneResponse(Scene scene) {
-        this.id = scene.getId();
+        this.id = scene.getID();
         this.storyId = scene.getStoryId();
         this.parentId = scene.getParentID();
         this.option = scene.getTitle();

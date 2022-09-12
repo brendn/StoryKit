@@ -14,29 +14,37 @@ public class Scene {
      */
     private String parentID;
 
-    // "option"
+    /**
+     * The title of the scene, which will appear on the list of options for a given scene
+     */
     private String title;
 
+    /**
+     * The description of the scene, which will display when you view the scene directly
+     */
     private String description;
 
+    /**
+     * The ID of the story that this scene belongs to
+     */
     private String storyId;
 
     public Scene() {
         super();
     }
-    
-    public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
     public Scene(String parentID, String title, String description) {
         this.parentID = parentID;
         this.title = title;
         this.description = description;
+    }
+
+    public String getID() {
+        return id;
+    }
+
+    public void setID(String id) {
+        this.id = id;
     }
 
     public String getParentID() {
@@ -57,5 +65,13 @@ public class Scene {
 
     public void setStoryId(String storyId) {
         this.storyId = storyId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

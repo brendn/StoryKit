@@ -17,10 +17,10 @@ public class PictureService {
 	private final RestTemplate restTemplate = new RestTemplate();
 
 	public PictureResponse getPicture(String name) {
-		String url = "https://api.pexels.com/v1/search?query=".concat(name);
+		String url = String.format("https://api.pexels.com/v1/search?query=%s", name);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", apiKey);
-		HttpEntity<String> request = new HttpEntity<String>(headers);
+		HttpEntity<String> request = new HttpEntity<>(headers);
 		ResponseEntity<PictureResponse> response = restTemplate.exchange(url, HttpMethod.GET, request, PictureResponse.class);
 		return response.getBody();
 	}

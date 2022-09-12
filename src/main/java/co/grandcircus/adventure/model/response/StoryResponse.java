@@ -10,7 +10,7 @@ public class StoryResponse {
     public String id, title, startingSceneId;
 
     public StoryResponse(Story story) {
-        this.id = story.getId();
+        this.id = story.getID();
         this.title = story.getTitle();
         this.startingSceneId = story.getStartingScene();
     }

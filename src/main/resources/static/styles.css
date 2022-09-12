@@ -3,9 +3,9 @@ body {
 }
 
 .card {
-    width: 150px;
-    display:inline-block;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: auto;
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
 }
 
@@ -14,9 +14,28 @@ body {
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.4);
 }
 
 .container {
     padding: 10px 16px;
+}
+
+a.button1 {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    color: #000;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+a.button1:hover {
+    color: #fff;
+    background-color: #000;
 }

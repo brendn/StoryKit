@@ -7,4 +7,8 @@ public class StoryNotFoundException extends RuntimeException {
     public StoryNotFoundException(String s) {
         super(s);
     }
+
+    public StoryNotFoundException() {
+        super("Story not found!");
+    }
 }
