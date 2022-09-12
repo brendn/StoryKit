@@ -21,8 +21,7 @@
         <label for="picture">Story Picture: </label> <input type="text" id="picture" name="picture" value=""><br>
         <br />
         <label for="option">Starting Scene Title:</label> <input type="text" id="option" name="option" value=""><br>
-        <label for="description">Starting Scene Description:</label>
-        <br>
+        <label>Starting Scene Description:</label>
         <textarea name="description" rows="4" cols="50"></textarea>
         <input type="submit" value="Submit">
     </form>

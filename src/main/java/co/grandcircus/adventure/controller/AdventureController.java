@@ -13,6 +13,7 @@ import co.grandcircus.adventure.model.Story;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.grandcircus.adventure.util.PathCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -132,6 +133,45 @@ public class AdventureController {
         story.setTitle(title);
         story.setPicture(picture);
         stories.save(story);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/deleteScene/{id}")
+    public String deleteScene(@PathVariable("id") String id, Model model) {
+        model.addAttribute("id", id);
+        return "deleteScene";
+    }
+
+    @RequestMapping("/deleteStory/{id}")
+    public String deleteStory(@PathVariable("id") String id, Model model) {
+        model.addAttribute("id", id);
+        return "deleteStory";
+    }
+
+    @PostMapping("/deleteScene")
+    public String deleteScene(@RequestParam("id") String id, @RequestParam("confirm") String confirm) {
+        Scene scene = scenes.findById(id).orElseThrow(SceneNotFoundException::new);
+        Scene parent = scenes.findById(scene.getParentID()).orElseThrow(SceneNotFoundException::new);
+        if (confirm != null) {
+            PathCalculator calculator = new PathCalculator(this.scenes);
+            List<Scene> children = new ArrayList<>();
+            calculator.flattenChildren(scene, children);
+            for (Scene child : children) {
+                scenes.deleteById(child.id);
+            }
+            scenes.deleteById(id);
+        }
+
+        return "redirect:/scene/" + parent.id;
+    }
+
+    @PostMapping("/deleteStory")
+    public String deleteStory(@RequestParam("id") String id, @RequestParam("confirm") String confirm) {
+        if (confirm != null) {
+            stories.deleteById(id);
+            List<Scene> children = scenes.findByStoryId(id).orElseThrow(SceneNotFoundException::new);
+            children.forEach(scene -> scenes.deleteById(scene.id));
+        }
         return "redirect:/";
     }
 }

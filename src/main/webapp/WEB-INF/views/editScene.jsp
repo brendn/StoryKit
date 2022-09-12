@@ -12,6 +12,7 @@
     <a href="/">Home</a>
     <br />
     <br />
+    <a href="/deleteScene/${id}">Delete Scene</a>
     <a href="/scene/${id}">Cancel</a>
 
     <h2>Edit scene</h2>
@@ -22,7 +23,7 @@
         <input type="text" id="option" name="title" value="${title}"><br>
         <label for="option">Scene Description:</label>
         <br>
-        <textarea name="description" rows="4" cols="50" value="${description}"></textarea>
+        <textarea name="description" rows="4" cols="50">${description}</textarea>
         <input type="submit" value="Submit">
     </form>
 </body>

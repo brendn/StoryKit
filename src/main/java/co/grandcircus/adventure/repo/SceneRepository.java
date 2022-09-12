@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface SceneRepository extends MongoRepository<Scene, String> {
 
     Optional<List<Scene>> findByParentID(String parentID);
+
+    Optional<List<Scene>> findByStoryId(String storyId);
 }

@@ -13,6 +13,7 @@
 
 <body>
     <a href="/">Home</a>
+    <a href="/deleteStory/${id}">Delete Story</a>
 
     <h2>Edit Story</h2>
 
