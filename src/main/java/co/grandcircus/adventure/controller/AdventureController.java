@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import co.grandcircus.adventure.util.PathCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,7 @@ public class AdventureController {
         PictureResponse newPic = service.getPicture("Ocean");
         model.addAttribute("options", options);
         model.addAttribute("urls", urls);
+
         return "home";
     }
 

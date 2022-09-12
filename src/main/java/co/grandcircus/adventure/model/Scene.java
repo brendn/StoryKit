@@ -33,14 +33,7 @@ public class Scene {
 		this.id = id;
 	}
 
-	public Scene(String parentID, String title, String description, String storyId) {
-        this.parentID = parentID;
-        this.title = title;
-        this.description = description;
-        this.storyId = storyId;
-    }
-
-	public Scene(String parentID, String title, String description) {
+    public Scene(String parentID, String title, String description) {
         this.parentID = parentID;
         this.title = title;
         this.description = description;

@@ -1,7 +1,5 @@
 package co.grandcircus.adventure.model.response;
 
-import co.grandcircus.adventure.model.Scene;
-
 public class ExtendedSceneResponse {
 
     public String description, storyID, storyTitle;

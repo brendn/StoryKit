@@ -21,12 +21,6 @@ public class Story {
 
     private String picture;
 
-    public Story(String title, String startingScene) {
-        this.title = title;
-        this.startingScene = startingScene;
-
-    }
-
     public Story(String title, String startingScene, String picture) {
         this.title = title;
         this.startingScene = startingScene;

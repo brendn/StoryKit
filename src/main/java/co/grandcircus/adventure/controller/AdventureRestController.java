@@ -10,6 +10,7 @@ import co.grandcircus.adventure.repo.StoryRepository;
 import co.grandcircus.adventure.exception.StoryNotFoundException;
 import co.grandcircus.adventure.model.Scene;
 import co.grandcircus.adventure.model.Story;
+import co.grandcircus.adventure.util.PathCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +59,17 @@ public class AdventureRestController {
         Scene scene = scenes.findById(id).orElseThrow(() -> new SceneNotFoundException("idk"));
         List<Scene> optionsOld = scenes.findByParentID(id).orElseThrow(() -> new SceneNotFoundException("Not here chief"));
         List<OptionResponse> options = OptionResponse.fromScenes(optionsOld);
+
+        PathCalculator pathCalculator = new PathCalculator(this.scenes);
+
+        String shortestPathSceneID = pathCalculator.findShortestPath(scene).id;
+        String longestPathSceneID = pathCalculator.findLongestPath(scene).id;
+
+        for (OptionResponse option : options) {
+            option.setShortest(option.sceneId.equals(shortestPathSceneID));
+            option.setLongest(option.sceneId.equals(longestPathSceneID));
+        }
+
         OptionResponse[] optionArray = options.toArray(new OptionResponse[options.size()]);
         String storyTitle = readOne(scene.getStoryId()).title;
 

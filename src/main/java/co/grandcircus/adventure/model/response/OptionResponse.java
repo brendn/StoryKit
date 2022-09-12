@@ -23,7 +23,15 @@ public class OptionResponse {
 
     public static List<OptionResponse> fromScenes(List<Scene> sceneList) {
         List<OptionResponse> out = new ArrayList<>();
-        sceneList.forEach(scene -> out.add(new OptionResponse(scene.getDescription(), scene.getId())));
+        sceneList.forEach(scene -> out.add(new OptionResponse(scene.getTitle(), scene.getId())));
         return out;
+    }
+
+    public void setShortest(boolean shortest) {
+        this.shortest = shortest;
+    }
+
+    public void setLongest(boolean longest) {
+        this.longest = longest;
     }
 }

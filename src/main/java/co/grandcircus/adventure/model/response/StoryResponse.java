@@ -9,12 +9,6 @@ public class StoryResponse {
 
     public String id, title, startingSceneId;
 
-    public StoryResponse(String id, String title, String startingSceneId) {
-        this.id = id;
-        this.title = title;
-        this.startingSceneId = startingSceneId;
-    }
-
     public StoryResponse(Story story) {
         this.id = story.getId();
         this.title = story.getTitle();
