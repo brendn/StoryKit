@@ -4,7 +4,6 @@ import co.grandcircus.adventure.exception.StoryNotFoundException;
 import co.grandcircus.adventure.repo.SceneRepository;
 
 import co.grandcircus.adventure.repo.StoryRepository;
-import co.grandcircus.adventure.pexels.PictureResponse;
 import co.grandcircus.adventure.pexels.PictureService;
 import co.grandcircus.adventure.exception.SceneNotFoundException;
 import co.grandcircus.adventure.model.Scene;
@@ -37,7 +36,7 @@ public class AdventureController {
         List<String> urls = new ArrayList<>();
 
         for (Story story : options) {
-            urls.add(service.getPicture(story.getPicture()).getSmallURL());
+            urls.add(service.getPicture(story.getPictureURL()).getSmallURL());
         }
 
         model.addAttribute("options", options);
@@ -89,8 +88,6 @@ public class AdventureController {
     @PostMapping("/createStory")
     public String createStory(Model model, @RequestParam("title") String title, @RequestParam("picture") String picture,
                               @RequestParam("option") String option, @RequestParam("description") String description) {
-    	
-    	
         Scene newScene = new Scene(null, option, description);
         scenes.save(newScene);
         Story newStory = new Story(title, newScene.id, picture);
@@ -98,7 +95,7 @@ public class AdventureController {
         newScene.setStoryId(newStory.getID());
         scenes.save(newScene);
     	
-        List<String> urls = service.getPicture(newStory.getPicture()).getTenPhotos();
+        List<String> urls = service.getPicture(newStory.getPicturePrompt()).getTenPhotos();
         model.addAttribute("urls", urls);
         model.addAttribute("id", newStory.getID());
 
@@ -107,19 +104,14 @@ public class AdventureController {
     
     @RequestMapping("/selectPictures")
     public String selectPic() {
-    	
         return "selectPictures";
     }
-    
 
     @PostMapping("/selectPictures")
     public String grabPictures(@RequestParam String searchType, @RequestParam String id) {
-    	
     	Story updatedPic = stories.findById(id).orElseThrow(StoryNotFoundException::new);
-    	updatedPic.setPicture(searchType);
+    	updatedPic.setPictureURL(searchType);
     	stories.save(updatedPic);
-    	
-    	
         return "redirect:/";
     }
     
@@ -147,19 +139,24 @@ public class AdventureController {
     public String editStory(@PathVariable("id") String id, Model model) {
         Story story = stories.findById(id).orElseThrow(StoryNotFoundException::new);
         model.addAttribute("title", story.getTitle());
-        model.addAttribute("picture", story.getPicture());
+        model.addAttribute("picture", story.getPicturePrompt());
         model.addAttribute("id", id);
         return "editStory";
     }
 
     @PostMapping("/editStory")
     public String editStory(@RequestParam("storyID") String storyID, @RequestParam("title") String title,
-                            @RequestParam("picture") String picture) {
+                            @RequestParam("picture") String picture, Model model) {
         Story story = stories.findById(storyID).orElseThrow(StoryNotFoundException::new);
         story.setTitle(title);
-        story.setPicture(picture);
+        story.setPicturePrompt(picture);
         stories.save(story);
-        return "redirect:/";
+
+        List<String> urls = service.getPicture(story.getPicturePrompt()).getTenPhotos();
+        model.addAttribute("urls", urls);
+        model.addAttribute("id", story.getID());
+
+        return "selectPictures";
     }
 
     @RequestMapping("/deleteScene/{id}")

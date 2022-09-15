@@ -19,15 +19,25 @@ public class Story {
      */
     private String startingScene;
 
-    private String picture;
+    private String pictureURL;
 
-    public Story(String title, String startingScene, String picture) {
+    private String picturePrompt;
+
+    public Story(String title, String startingScene, String picturePrompt) {
         this.title = title;
         this.startingScene = startingScene;
-        this.picture = picture;
+        this.picturePrompt = picturePrompt;
     }
 
     public Story() {}
+
+    public String getPicturePrompt() {
+        return picturePrompt;
+    }
+
+    public void setPicturePrompt(String picturePrompt) {
+        this.picturePrompt = picturePrompt;
+    }
 
     public String getID() {
         return id;
@@ -49,15 +59,15 @@ public class Story {
         this.title = title;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
     }
 
-    public String getPicture() {
-        if (picture == null) {
-            this.picture = "Forest";
+    public String getPictureURL() {
+        if (pictureURL == null) {
+            this.pictureURL = "Forest";
         }
-        return picture;
+        return pictureURL;
     }
 
 }

@@ -14,7 +14,7 @@
 
  	<c:forEach var="option" items="${options}" varStatus="loop">
 		<div class="card">
-          <center><img src="${option.getPicture()}"></center>
+          <center><img src="${option.getPictureURL()}"></center>
           <div class="container">
            <center><a href="/scene/${option.getStartingScene()}">${option.title}</a></center>
           </div>
