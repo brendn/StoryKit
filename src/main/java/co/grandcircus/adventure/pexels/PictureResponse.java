@@ -1,5 +1,6 @@
 package co.grandcircus.adventure.pexels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,6 +14,15 @@ public class PictureResponse {
 
 	public List<Photo> getPhotos() {
 		return this.photos;
+	}
+	
+	public List<String> getTenPhotos() {
+		List<String> tenPhotos = new ArrayList<>();
+		
+		for (int i = 0; i < 5; i++) {
+			tenPhotos.add(getPhotos().get(i).getSrc().getSmall());
+		}
+		return tenPhotos;
 	}
 
 	public String getSmallURL() {

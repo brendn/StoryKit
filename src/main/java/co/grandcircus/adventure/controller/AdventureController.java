@@ -87,16 +87,42 @@ public class AdventureController {
 
     // Start A Story On Home Page
     @PostMapping("/createStory")
-    public String createStory(@RequestParam("title") String title, @RequestParam("picture") String picture,
+    public String createStory(Model model, @RequestParam("title") String title, @RequestParam("picture") String picture,
                               @RequestParam("option") String option, @RequestParam("description") String description) {
+    	
+    	
         Scene newScene = new Scene(null, option, description);
         scenes.save(newScene);
         Story newStory = new Story(title, newScene.id, picture);
         stories.save(newStory);
         newScene.setStoryId(newStory.getID());
         scenes.save(newScene);
+    	
+        List<String> urls = service.getPicture(newStory.getPicture()).getTenPhotos();
+        model.addAttribute("urls", urls);
+        model.addAttribute("id", newStory.getID());
+
+        return "selectPictures";
+    }
+    
+    @RequestMapping("/selectPictures")
+    public String selectPic() {
+    	
+        return "selectPictures";
+    }
+    
+
+    @PostMapping("/selectPictures")
+    public String grabPictures(@RequestParam String searchType, @RequestParam String id) {
+    	
+    	Story updatedPic = stories.findById(id).orElseThrow(StoryNotFoundException::new);
+    	updatedPic.setPicture(searchType);
+    	stories.save(updatedPic);
+    	
+    	
         return "redirect:/";
     }
+    
 
     @RequestMapping("/editScene/{id}")
     public String editScene(@PathVariable("id") String id, Model model) {
