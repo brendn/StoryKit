@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class AdventureController {
 
-    private final List<String> THUMBNAIL_URLS = new ArrayList<>();
-
     @Autowired
     private StoryRepository stories;
 
@@ -35,17 +33,7 @@ public class AdventureController {
     @RequestMapping("/")
     public String index(Model model) {
         List<Story> options = stories.findAll();
-
-        if (THUMBNAIL_URLS.isEmpty() || THUMBNAIL_URLS.size() < options.size()) {
-            THUMBNAIL_URLS.clear();
-            for (Story story : options) {
-                THUMBNAIL_URLS.add(service.getPicture(story.getPictureURL()).getSmallURL());
-            }
-        }
-
         model.addAttribute("options", options);
-        model.addAttribute("urls", THUMBNAIL_URLS);
-
         return "home";
     }
 
