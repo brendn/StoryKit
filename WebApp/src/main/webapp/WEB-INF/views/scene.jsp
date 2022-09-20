@@ -11,10 +11,10 @@
 </head>
 
 <body>
-    <a href="/">Home</a>
-    <a href="/editStory/${scene.getStoryId()}">Edit Story</a>
-    <a href="/editScene/${id}">Edit Scene</a>
-    <br />
+    <a href="/" class="button1">Home</a>
+    <a href="/editStory/${scene.getStoryId()}" class="button1">Edit Story</a>
+    <a href="/editScene/${id}" class="button1">Edit Scene</a>
+    <div class="main">
     <h3>
         <p>${title}</p>
     </h3>
@@ -27,5 +27,6 @@
     </c:forEach>
 
     <a href="/create/${id}" class="button1">(Add a new option)</a>
+    </div>
 </body>
 </html>

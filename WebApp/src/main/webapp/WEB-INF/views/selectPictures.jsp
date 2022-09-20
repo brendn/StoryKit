@@ -9,19 +9,18 @@
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-	<h2>Select the picture you want</h2>
+<div class="main">
+	<h2>Select a Picture</h2>
 	<form class="form" method="POST" action="/selectPictures">
 		<div class="searchOptions">
 			<input type="hidden" id="id" name="id" value="${id}">
 			<c:forEach var="url" items="${urls}" varStatus="loop">
-				<div class="card">
-					<input type="radio" name="searchType" value="${url}" checked="checked">
-					<label> <img src="${urls[loop.index]}"> </label>
-					<div class="container"></div>
-				</div>
+					<label> <input type="radio" name="searchType" value="${url}" checked="checked">
+					<img src="${urls[loop.index]}"> </label>
 			</c:forEach>
 		</div>
 		<input type="submit" />
 	</form>
+</div>
 </body>
 </html>

@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+    <a href="/" class="button1">Home</a>
+    <a href="/scene/${id}" class="button1">Cancel</a>
+    <div class="main">
     <h2>Confirm Deletion</h2>
 	<p>Easy there partner! You sure you want to delete that?</p>
 
@@ -19,6 +22,7 @@
         <br />
         <input type="submit" value = "Submit" />
     </form>
+    </div>
 
 </body>
 </html>

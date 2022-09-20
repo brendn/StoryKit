@@ -9,19 +9,23 @@
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h2>Choose Your Own Adventure</h2>
+<div class="main">
+    <h2>StoryKit</h2>
 	<p>Choose A Story From The List Below</p>
 
- 	<c:forEach var="option" items="${options}" varStatus="loop">
-		<div class="card">
-          <center><img src="${option.getPictureURL()}"></center>
-          <div class="container">
-           <center><a href="/scene/${option.getStartingScene()}">${option.title}</a></center>
-          </div>
-        </div>
-	</c:forEach>
+    <div class="options">
+        <c:forEach var="option" items="${options}" varStatus="loop">
+            <div class="card">
+              <center><img src="${option.getPictureURL()}"></center>
+              <div class="container">
+               <center><a href="/scene/${option.getStartingScene()}">${option.title}</a></center>
+              </div>
+            </div>
+        </c:forEach>
+    </div>
 	
 	<p>Feeling Creative? <a href="/createStory" class="button1">Start Your Own Story</a></p>
-
+</div>
 </body>
+
 </html>

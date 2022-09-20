@@ -2,7 +2,42 @@ body {
     font-family: Helvetica Neue, Arial;
 }
 
+.main {
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+}
+
+[type=radio]+img {
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+[type=radio]:checked + img {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+}
+input {
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+input[type=text] {
+    padding: 12px 20px;
+}
+
+.options {
+    margin-bottom: 50px;
+}
+
 .card {
+    margin-top: 15px;
+    margin-right: 25px;
     width: auto;
     display: inline-block;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
