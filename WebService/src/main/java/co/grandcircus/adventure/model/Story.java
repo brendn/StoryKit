@@ -55,6 +55,10 @@ public class Story {
         this.id = id;
     }
 
+    public void setStartingScene(String startingScene) {
+        this.startingScene = startingScene;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

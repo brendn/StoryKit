@@ -21,4 +21,7 @@ public class StoryResponse {
         return out;
     }
 
+    public Story toStory() {
+        return new Story(this.title, this.startingSceneId, "Forest");
+    }
 }

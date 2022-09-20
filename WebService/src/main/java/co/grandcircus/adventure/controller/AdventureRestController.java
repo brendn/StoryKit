@@ -138,6 +138,39 @@ public class AdventureRestController {
         return "Deleted Story ID: " + id;
     }
 
+    @PostMapping("/stories")
+    @ResponseStatus(HttpStatus.CREATED)
+    public StoryResponse create(@RequestBody StoryResponse storyResponse) {
+        stories.insert(storyResponse.toStory());
+        return storyResponse;
+    }
+
+    @PostMapping("/scenes")
+    @ResponseStatus(HttpStatus.CREATED)
+    public SceneResponse createScene(@RequestBody SceneResponse sceneResponse) {
+        scenes.insert(sceneResponse.toScene());
+        return sceneResponse;
+    }
+
+    @PutMapping("/scenes/{id}")
+    public SceneResponse updateScene(@PathVariable("id") String id, @RequestBody SceneResponse sceneResponse) {
+        Scene scene = scenes.findById(id).orElseThrow(SceneNotFoundException::new);
+        scene.setTitle(sceneResponse.option);
+        scene.setDescription(sceneResponse.description);
+        scene.setStoryId(sceneResponse.storyId);
+        scenes.save(scene);
+        return sceneResponse;
+    }
+
+    @PutMapping("/stories/{id}")
+    public StoryResponse updateStory(@PathVariable("id") String id, @RequestBody StoryResponse storyResponse) {
+        Story story = stories.findById(id).orElseThrow(StoryNotFoundException::new);
+        story.setTitle(storyResponse.title);
+        story.setStartingScene(storyResponse.startingSceneId);
+        stories.save(story);
+        return storyResponse;
+    }
+
     @ResponseBody
     @ExceptionHandler(StoryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -146,7 +179,7 @@ public class AdventureRestController {
     }
 
     @ResponseBody
-    @ExceptionHandler(StoryNotFoundException.class)
+    @ExceptionHandler(SceneNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String notFound(SceneNotFoundException ex) {
         return ex.getMessage();

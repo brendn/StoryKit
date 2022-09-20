@@ -22,4 +22,8 @@ public class SceneResponse {
         scenes.forEach(scene -> out.add(new SceneResponse(scene)));
         return out;
     }
+
+    public Scene toScene() {
+        return new Scene(parentId, option, description);
+    }
 }
