@@ -18,6 +18,7 @@
     <form action="/create/${id}" method="post">
         <input type="text" id="option" name="title" value="" placeholder="Title"><br>
         <textarea name="description" rows="4" cols="50" placeholder="Description"></textarea>
+        <br/>
         <input type="submit" value="Submit">
     </form>
     </div>

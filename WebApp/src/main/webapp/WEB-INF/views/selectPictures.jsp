@@ -19,6 +19,7 @@
 					<img src="${urls[loop.index]}"> </label>
 			</c:forEach>
 		</div>
+		<br/>
 		<input type="submit" />
 	</form>
 </div>

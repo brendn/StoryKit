@@ -23,6 +23,7 @@
         <label for="option">Scene Description:</label>
         <br/>
         <textarea name="description" rows="4" cols="50">${description}</textarea>
+        <br/>
         <input type="submit" value="Submit">
     </form>
     </div>

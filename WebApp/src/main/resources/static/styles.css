@@ -1,5 +1,7 @@
 body {
     font-family: Helvetica Neue, Arial;
+    background-color: #232830;
+    color: #c0c5ce;
 }
 
 .main {
@@ -7,6 +9,16 @@ body {
     padding-right: 30px;
     padding-bottom: 50px;
     padding-left: 80px;
+}
+.mainStory {
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
 }
 [type=radio] {
     position: absolute;
@@ -19,9 +31,11 @@ body {
 }
 
 [type=radio]:checked + img {
+    border: 0.1em solid #8ea1b4;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transition: 0.3s;
 }
+
 input {
     margin-bottom: 10px;
     margin-top: 15px;
@@ -29,15 +43,25 @@ input {
 
 input[type=text] {
     padding: 12px 20px;
+    background-color: #2b303b;
+    color: #c0c5ce;
+}
+
+textarea {
+    padding: 12px 20px;
+    background-color: #2b303b;
+    color: #c0c5ce;
 }
 
 .options {
     margin-bottom: 50px;
 }
 
+
 .card {
     margin-top: 15px;
     margin-right: 25px;
+    background-color: #343d46;
     width: auto;
     display: inline-block;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -46,10 +70,11 @@ input[type=text] {
 
 .card a {
     text-decoration: none;
+    color: #dfe1d2;
 }
 
 .card:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 10px 0 rgba(1, 1, 1, 0.4);
 }
 
 .container {
@@ -59,18 +84,74 @@ input[type=text] {
 a.button1 {
     display: inline-block;
     padding: 0.35em 1.2em;
-    border: 0.1em solid #000;
+    border: 0.1em solid #8ea1b4;
     margin: 0 0.3em 0.3em 0;
     border-radius: 0.12em;
     box-sizing: border-box;
     text-decoration: none;
     font-weight: 300;
-    color: #000;
+    color: #8ea1b4;
     text-align: center;
     transition: all 0.2s;
 }
 
+input[type=submit] {
+    font-size: 12px;
+    background-color: #232830;
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #8ea1b4;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    color: #8ea1b4;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+input[type=submit]:hover {
+    color: #2b303b;
+    cursor: pointer;
+    background-color: #8ea1b4;
+}
+
+
 a.button1:hover {
-    color: #fff;
-    background-color: #000;
+    color: #2b303b;
+    background-color: #8ea1b4;
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
 }

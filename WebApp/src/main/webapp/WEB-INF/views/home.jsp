@@ -23,7 +23,7 @@
             </div>
         </c:forEach>
     </div>
-	
+
 	<p>Feeling Creative? <a href="/createStory" class="button1">Start Your Own Story</a></p>
 </div>
 </body>

@@ -23,6 +23,8 @@
         <br />
         <input type="text" id="option" name="option" placeholder="Starting Scene Title" value=""><br>
         <textarea name="description" rows="4" cols="50" placeholder="Starting Scene Description"></textarea>
+        <br/>
+        <br/>
         <input type="submit" value="Submit">
     </form>
     </div>

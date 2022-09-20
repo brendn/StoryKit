@@ -14,7 +14,7 @@
     <a href="/" class="button1">Home</a>
     <a href="/editStory/${scene.getStoryId()}" class="button1">Edit Story</a>
     <a href="/editScene/${id}" class="button1">Edit Scene</a>
-    <div class="main">
+    <div class="mainStory">
     <h3>
         <p>${title}</p>
     </h3>
