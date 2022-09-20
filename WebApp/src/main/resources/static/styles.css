@@ -27,12 +27,12 @@ body {
 
 [type=radio]+img {
     cursor: pointer;
+    border: 0.1em solid #232830;
     margin-right: 0.5rem;
 }
 
 [type=radio]:checked + img {
     border: 0.1em solid #8ea1b4;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transition: 0.3s;
 }
 
@@ -64,7 +64,7 @@ textarea {
     background-color: #343d46;
     width: auto;
     display: inline-block;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 0.1em solid #343d46;
     transition: 0.3s;
 }
 
@@ -74,7 +74,7 @@ textarea {
 }
 
 .card:hover {
-    box-shadow: 0 6px 10px 0 rgba(1, 1, 1, 0.4);
+    border: 0.1em solid #8ea1b4;
 }
 
 .container {
